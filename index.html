@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChocoFactory | Chocolate Happiness</title>
+  <style>
+    :root {
+      --brown: #351811;
+      --dark: #24100c;
+      --gold: #e8b66b;
+      --cream: #fff8ed;
+      --text: #4b2b20;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      letter-spacing: 3px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 70px);
+      line-height: 1.1;
+      margin: 20px 0;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      color: #f0ded3;
+      max-width: 500px;
+      margin-bottom: 28px;
+      font-size: 17px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 24px;
+      border: none;
+      border-radius: 6px;
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: bold;
+      transition: .25s;
+    }
+
+    .btn:hover {
+      background: #ffd18c;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: white;
+      margin-left: 10px;
+    }
+
+    /* General sections */
+    section {
+      padding: 75px 8%;
+      scroll-margin-top: 85px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: var(--brown);
+      font-size: clamp(30px, 4vw, 42px);
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #856b5e;
+    }
+
+    /* Product cards */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px #35181112;
+      transition: transform .25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .product-card img {
+      display: block;
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      color: var(--brown);
+      margin-bottom: 5px;
+    }
+
+    .product-info p {
+      color: #856b5e;
+      font-size: 14px;
+      min-height: 44px;
+    }
+
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--brown);
+    }
+
+    .add-btn {
+      border: none;
+      border-radius: 5px;
+      padding: 9px 12px;
+      background: var(--brown);
+      color: white;
+    }
+
+    .add-btn:hover {
+      background: #6c3825;
+    }
+
+    /* About section */
+    .about {
+      background: #f1e3d2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      min-height: 300px;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .about h2 {
+      color: var(--brown);
+      font-size: 36px;
+      line-height: 1.2;
+      margin: 12px 0 20px;
+    }
+
+    .about p {
+      margin-bottom: 20px;
+    }
+
+    /* Call to action */
+    .cta {
+      text-align: center;
+      background: var(--brown);
+      color: white;
+    }
+
+    .cta h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      margin-bottom: 25px;
+      color: #ead8cb;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: #e7d6cb;
+      padding: 35px 8%;
+      text-align: center;
+    }
+
+    footer .logo {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    /* Responsive layout */
+    @media (max-width: 1000px) {
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      header {
+        padding: 15px 4%;
+      }
+
+      nav {
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      header {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 20px;
+        font-size: 14px;
+      }
+
+      .cart {
+        margin-left: auto;
+      }
+
+      .hero {
+        min-height: 500px;
+        padding: 55px 7%;
+      }
+
+      section {
+        padding: 55px 6%;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card img {
+        height: 240px;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .about h2 {
+        font-size: 30px;
+      }
+
+      .btn-outline {
+        margin: 12px 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <header>
+    <a class="logo" href="#home">🍫 ChocoFactory</a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#products">Chocolates</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="cart" id="cartButton" type="button">
+      🛒 Cart (<span id="cartCount">0</span>)
+    </button>
+  </header>
+
+  <main>
+    <!-- Hero banner -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">Made for chocolate lovers</div>
+        <h1>Life Is Better With <span>Chocolate.</span></h1>
+        <p>
+          Discover delicious chocolate treats made to sweeten
+          your everyday moments. Find your favorite indulgence
+          at ChocoFactory.
+        </p>
+        <a class="btn" href="#products">Explore Chocolates →</a>
+        <a class="btn btn-outline" href="#about">Our Story</a>
+      </div>
+    </section>
+
+    <!-- Product section -->
+    <section id="products">
+      <div class="section-title">
+        <h2>Our Best Sellers</h2>
+        <p>A little sweetness makes every day special.</p>
+      </div>
+
+      <div class="products">
+        <article class="product-card">
+          <img
+            src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=700&q=80"
+            alt="Assorted chocolate pieces"
+            loading="lazy"
+          >
+          <div class="product-info">
+            <h3>Dark Chocolate</h3>
+            <p>Rich cocoa flavor for true chocolate lovers.</p>
+            <div class="product-bottom">
+              <span class="price">₹199</span>
+              <button class="add-btn" data-product="Dark Chocolate">
+                Add +
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img
+            src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=700&q=80"
+            alt="Milk chocolate confectionery"
+            loading="lazy"
+          >
+          <div class="product-info">
+            <h3>Milk Chocolate</h3>
+            <p>Smooth, creamy and wonderfully sweet.</p>
+            <div class="product-bottom">
+              <span class="price">₹149</span>
+              <button class="add-btn" data-product="Milk Chocolate">
+                Add +
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img
+            src="https://images.unsplash.com/photo-1575377427642-087cf684f29d?auto=format&fit=crop&w=700&q=80"
+            alt="Chocolate truffles and treats"
+            loading="lazy"
+          >
+          <div class="product-info">
+            <h3>Chocolate Truffles</h3>
+            <p>Delicate bites for your sweetest moments.</p>
+            <div class="product-bottom">
+              <span class="price">₹249</span>
+              <button class="add-btn" data-product="Chocolate Truffles">
+                Add +
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img
+            src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80"
+            alt="Gift box for a special occasion"
+            loading="lazy"
+          >
+          <div class="product-info">
+            <h3>Chocolate Gift Box</h3>
+            <p>A thoughtful gift for someone special.</p>
+            <div class="product-bottom">
+              <span class="price">₹399</span>
+              <button class="add-btn" data-product="Chocolate Gift Box">
+                Add +
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About section -->
+    <section class="about" id="about">
+      <img
+        src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=1000&q=85"
+        alt="Chocolate treats prepared for chocolate lovers"
+        loading="lazy"
+      >
+
+      <div>
+        <div class="eyebrow">Welcome to ChocoFactory</div>
+        <h2>Our Passion Is Making Life Sweeter.</h2>
+        <p>
+          At ChocoFactory, chocolate is more than a treat.
+          It is a way to celebrate, share happiness and create
+          beautiful memories.
+        </p>
+        <p>
+          Explore our collection and find something delicious
+          for yourself or someone you love.
+        </p>
+        <a href="#products" class="btn">Discover Our Collection</a>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="cta">
+      <h2>Make Every Moment Sweeter!</h2>
+      <p>Your next favorite chocolate is waiting for you.</p>
+      <a href="#products" class="btn">Shop Chocolates 🍫</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <a class="logo" href="#home">🍫 ChocoFactory</a>
+    <p>Made with love for chocolate lovers.</p>
+    <p>Contact: hello@chocofactory.example</p>
+    <p>© <span id="year"></span> ChocoFactory. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simple demonstration shopping cart
+    let cartCount = 0;
+    const cartItems = [];
+
+    const countDisplay = document.getElementById("cartCount");
+
+    document.querySelectorAll(".add-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const product = button.dataset.product;
+
+        cartCount++;
+        cartItems.push(product);
+        countDisplay.textContent = cartCount;
+
+        const originalText = button.textContent;
+        button.textContent = "Added ✓";
+
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 900);
+      });
+    });
+
+    document.getElementById("cartButton").addEventListener("click", () => {
+      if (cartItems.length === 0) {
+        alert("Your cart is empty. Add some chocolates first!");
+        return;
+      }
+
+      const summary = cartItems
+        .map((item, index) => `${index + 1}. ${item}`)
+        .join("\n");
+
+      alert(
+        `Your chocolate cart (${cartCount} items):\n\n${summary}\n\n` +
+        "This is a demo cart. Online checkout is not configured yet."
+      );
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
